@@ -1,5 +1,5 @@
-#include <string>
-// Класс исключений
+п»ї#include <string>
+// РљР»Р°СЃСЃ РёСЃРєР»СЋС‡РµРЅРёР№
 class stexcp :public std::exception
 {
 private:
@@ -8,43 +8,43 @@ public:
 	stexcp(const std::string &msg) { errmsg = msg; }
 };
 
-// Шаблон класса Стек
+// РЁР°Р±Р»РѕРЅ РєР»Р°СЃСЃР° РЎС‚РµРє
 template<class sType>
 class Stack
 {
 private:
-	const int Size;						//Максимальный размер стека
-	int top;							//Индекс текущего
-	sType* StMem;						//Указатель на эл-ты стека
+	const int Size;						//РњР°РєСЃРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ СЃС‚РµРєР°
+	int top;							//РРЅРґРµРєСЃ С‚РµРєСѓС‰РµРіРѕ
+	sType* StMem;						//РЈРєР°Р·Р°С‚РµР»СЊ РЅР° СЌР»-С‚С‹ СЃС‚РµРєР°
 
 public:
-	Stack(int s = 10000);								// Конструктор без параметров
-	~Stack();											// Деструктор
-	Stack(const Stack<sType>& src);						// Конструктор копирования
-	int size() const { return Size; }					// Размер стека
-	void push(const sType& val);						// Положить элемент на вершину стека
-	sType pop();										// Доступ к вершине стека с удалением 
-	sType peek() const;								    // Доступ к вершине стека без удаления
-	bool full() const { return top == Size - 1; }		// Стек заполнен
-	bool empty() const { return top == -1; }			// Стек пуст
+	Stack(int s = 10000);							    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
+	~Stack();											// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
+	Stack(const Stack<sType>& src);						// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
+	int size() const { return Size; }					// Р Р°Р·РјРµСЂ СЃС‚РµРєР°
+	void push(const sType& val);						// РџРѕР»РѕР¶РёС‚СЊ СЌР»РµРјРµРЅС‚ РЅР° РІРµСЂС€РёРЅСѓ СЃС‚РµРєР°
+	sType pop();										// Р”РѕСЃС‚СѓРї Рє РІРµСЂС€РёРЅРµ СЃС‚РµРєР° СЃ СѓРґР°Р»РµРЅРёРµРј 
+	sType peek() const;								    // Р”РѕСЃС‚СѓРї Рє РІРµСЂС€РёРЅРµ СЃС‚РµРєР° Р±РµР· СѓРґР°Р»РµРЅРёСЏ
+	bool full() const { return top == Size - 1; }		// РЎС‚РµРє Р·Р°РїРѕР»РЅРµРЅ
+	bool empty() const { return top == -1; }			// РЎС‚РµРє РїСѓСЃС‚
 };
 
 
-// Реализация шаблона класса Стек
-template<class sType>			// Конструктор без параметров
+// Р РµР°Р»РёР·Р°С†РёСЏ С€Р°Р±Р»РѕРЅР° РєР»Р°СЃСЃР° РЎС‚РµРє
+template<class sType>			// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ Р±РµР· РїР°СЂР°РјРµС‚СЂРѕРІ
 Stack<sType>::Stack(int s) : Size(s)
 {
 	top = -1;
 	StMem = new sType[Size];
 }
 
-template<class sType>			// Деструктор
+template<class sType>			// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 Stack<sType>::~Stack()
 {
 	delete[] StMem;
 }
 
-template<class sType>			// Конструктор копирования
+template<class sType>			// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 Stack<sType>::Stack(const Stack<sType>& src)
 {
 	Size = src.Size;
@@ -56,7 +56,7 @@ Stack<sType>::Stack(const Stack<sType>& src)
 	}
 }
 
-template<class sType>			// Положить элемент на вершину стека
+template<class sType>			// РџРѕР»РѕР¶РёС‚СЊ СЌР»РµРјРµРЅС‚ РЅР° РІРµСЂС€РёРЅСѓ СЃС‚РµРєР°
 void Stack<sType>::push(const sType& val)
 {
 	if (!full())
@@ -65,7 +65,7 @@ void Stack<sType>::push(const sType& val)
 		throw stexcp("Stack overflow");
 }
 
-template<class sType>			// Доступ к вершине стека без удаления
+template<class sType>			// Р”РѕСЃС‚СѓРї Рє РІРµСЂС€РёРЅРµ СЃС‚РµРєР° Р±РµР· СѓРґР°Р»РµРЅРёСЏ
 sType Stack<sType>::peek() const
 {
 	if (!empty())
@@ -73,7 +73,7 @@ sType Stack<sType>::peek() const
 	else
 		throw stexcp("Stack is empty");
 }
-template<class sType>			// Доступ к вершине стека c удаленем
+template<class sType>			// Р”РѕСЃС‚СѓРї Рє РІРµСЂС€РёРЅРµ СЃС‚РµРєР° c СѓРґР°Р»РµРЅРµРј
 sType Stack<sType>::pop()
 {
 	if (!empty())
