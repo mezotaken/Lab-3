@@ -21,21 +21,20 @@ TEST(Stack, can_pop_and_peek_value)
 TEST(Stack, can_get_size)
 {
 	Stack<int> a(10);
-	EXPECT_EQ(a.size(), 10);
+	EXPECT_EQ(a.GetSize(), 10);
 }
 TEST(Stack, can_check_stack_state)
 {
 	Stack<int> a(1);
-	a.push(2);
-	EXPECT_EQ(a.full(), true);
-	a.pop();
 	EXPECT_EQ(a.empty(), true);
 }
-TEST(Stack, throws_when_push_full_stack)
+TEST(Stack, expands_when_push_full_stack)
 {
 	Stack<int> a(1);
 	a.push(1);
-	ASSERT_ANY_THROW(a.push(2));
+	EXPECT_EQ(1, a.GetSize());
+	ASSERT_NO_THROW(a.push(2));
+	EXPECT_EQ(2, a.GetSize());
 }
 TEST(Stack, throws_when_peek_or_pop_empty_stack)
 {

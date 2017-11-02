@@ -13,22 +13,21 @@ template<class sType>
 class Stack
 {
 private:
-	const int Size;						//Максимальный размер стека
+	int Size;							//Максимальный размер стека
 	int top;							//Индекс текущего
 	sType* StMem;						//Указатель на эл-ты стека
 
 public:
-	Stack(int s = 10000);							    // Конструктор без параметров
+	Stack(int s = 1000);							    // Конструктор без параметров
 	~Stack();											// Деструктор
 	Stack(const Stack<sType>& src);						// Конструктор копирования
-	int size() const { return Size; }					// Размер стека
+	int GetSize() const { return Size; }				// Размер стека
+	int GetInd() const { return top + 1; }
 	void push(const sType& val);						// Положить элемент на вершину стека
 	sType pop();										// Доступ к вершине стека с удалением 
 	sType peek() const;								    // Доступ к вершине стека без удаления
-	bool full() const { return top == Size - 1; }		// Стек заполнен
 	bool empty() const { return top == -1; }			// Стек пуст
 };
-
 
 // Реализация шаблона класса Стек
 template<class sType>			// Конструктор без параметров
@@ -48,21 +47,26 @@ template<class sType>			// Конструктор копирования
 Stack<sType>::Stack(const Stack<sType>& src)
 {
 	Size = src.Size;
-	if (top+1>0)
-	{
-		StMem = new sType[Size];
-		for (int i = 0; i < top+1; i++)
-			StMem[i] = src.StMem[i];
-	}
+	StMem = new sType[Size];
+	for (int i = 0; i < top+1; i++)
+		StMem[i] = src.StMem[i];
+	
 }
 
 template<class sType>			// Положить элемент на вершину стека
 void Stack<sType>::push(const sType& val)
 {
-	if (!full())
+	if (top == Size - 1)
+	{
+		Size *=2;
+		sType* temp = new sType[Size];
+		for (int i = 0; i < top + 1; i++)
+			temp[i] = StMem[i];
+		delete[] StMem;
+		StMem = temp;
+
+	}
 		StMem[++top] = val;
-	else
-		throw stexcp("Stack overflow");
 }
 
 template<class sType>			// Доступ к вершине стека без удаления
