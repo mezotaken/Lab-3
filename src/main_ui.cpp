@@ -7,32 +7,15 @@ char main_menu()
 	system("cls");
 	char res;
 	cout << "1. Calculate new expression\n";
-	cout << "2. Set variables\n";
-	cout << "3. View journal\n";
-	cout << "4. Exit\n\n";
+	cout << "2. View journal\n";
+	cout << "3. Exit\n\n";
 
-	for (int i = 0; i < 6; i++)
-		cout <<"  "<< (char)(117 + i)<<" = "<< arithmetic::GetVar(i);
-	
 	cout << "\n\n";
 	cout << "Choose menu item: ";
 	cin >> res;
 	return res;
 }
 
-char var_menu()
-{
-	system("cls");
-	char res;
-		for (int i = 0; i < 6; i++)
-			cout  << (char)(117 + i) << " = " << arithmetic::GetVar(i)<<endl;
-		cout << "\n";
-		cout << "1. Exit" << endl;
-		cout << "\n\n";
-		cout << "Choose variable ";
-		cin >> res;
-		return res;
-}
 
 int main()
 {	
@@ -57,7 +40,8 @@ int main()
 			cur = arithmetic(input);
 			if (cur.IsCorrect())
 			{
-				journal[nCalc] += (input + " = " + to_string(cur.Calc()));
+				journal[nCalc] += (input + " = " + to_string(cur.Calc(cin)));
+				journal[nCalc] += ("        |"+cur.getvars());
 				cout << journal[nCalc] << endl;
 				nCalc++;
 				if (nCalc == MAX_JOURNAL_NOTES)
@@ -67,21 +51,8 @@ int main()
 			system("pause");
 			break;
 		}
+
 		case '2':
-		{
-			do {
-				pmenu = var_menu();
-				if (pmenu <= 'z' && pmenu >= 'u')
-				{
-					double inp;
-					cout << "Input value " << pmenu << ": ";
-					cin >> inp;
-					arithmetic::SetVar((int)pmenu - 117, inp);
-				}
-			} while (pmenu != '1');
-		}
-		break;
-		case '3':
 		{
 			system("cls");
 			for (int i = 0; i < nCalc; i++)
@@ -89,8 +60,8 @@ int main()
 			system("pause");
 			break;
 		}
-		case '4': break;
+		case '3': break;
 		}
-	} while (pmenu != '4');
+	} while (pmenu != '3');
 	return 0;
 }

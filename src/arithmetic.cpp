@@ -1,8 +1,6 @@
 ﻿#include "arithmetic.h"
 using namespace std;
-
-const string arithmetic::symb = "/*+-().0123456789uvwxyz";
-double arithmetic::vars[] = {0};
+const string arithmetic::symb = "/*+-().0123456789abcdefghijklmnopqrstuvwxyz";
 
 //Удаление пробелов в строке
 void arithmetic::clrspace()
@@ -57,7 +55,7 @@ void arithmetic::parse()
 			else
 				cur = UNKNOWN;
 
-			if (cur != last || cur == OPERATOR||cur == LBRACKET|| cur == RBRACKET)
+			if (cur != last || cur == OPERATOR || cur == LBRACKET|| cur == RBRACKET|| cur == VARIABLE)
 			{
 				pLex[nL-1].tp = last;
 				nL++;
@@ -98,6 +96,7 @@ bool arithmetic::check_symbols() const
 	int k = 0;
 	for (int i = 0; i < nL; i++)
 	{
+		k=0;
 		if (pLex[i].tp == UNKNOWN)
 		{
 			if (res)
@@ -299,7 +298,7 @@ bool arithmetic::priority(Lexem in, Lexem top) const
 }
 
 //Подсчёт значения
-double arithmetic::Calc() const
+double arithmetic::Calc(istream& in)
 {
 	
 	Lexem* Output = new Lexem[2 * nL];
@@ -309,7 +308,15 @@ double arithmetic::Calc() const
 	{
 		if (Output[i].tp == NUMBER || Output[i].tp == VARIABLE)
 			if (Output[i].tp == VARIABLE)
-				res.push(vars[(int)(Output[i].str[0]) - 117]);
+			{
+				cout<<"Input "<<Output[i].str<<":";
+				double val;
+				in>>val;
+				res.push(val);
+				string cur = "";
+				cur+=(" "+Output[i].str+" = "+to_string(val));
+				vars.push(cur);
+			}
 			else
 				res.push(stod(Output[i].str));
 
@@ -324,11 +331,24 @@ double arithmetic::Calc() const
 				break;
 			case '*': res.push(lop * rop);
 				break;
-			case '/': res.push(lop / rop);
+			case '/': 
+				{
+					//if(rop<1e-25)
+					res.push(lop / rop);
+					//else
+						//throw 0;
+				}
 				break;
 			}
 		}
 	}
 
 	return res.peek();
+}
+string arithmetic::getvars()
+{
+	string res = "";
+	while(!vars.empty())
+		res+=vars.pop();
+	return res;
 }

@@ -1,6 +1,6 @@
 ﻿  arithmetic.cpp
-d:\misc\учеба\labsprogs\lab3\src\arithmetic.cpp(11): warning C4018: '<': signed/unsigned mismatch
-d:\misc\учеба\labsprogs\lab3\src\arithmetic.cpp(44): warning C4018: '<': signed/unsigned mismatch
-d:\misc\учеба\labsprogs\lab3\src\arithmetic.cpp(113): warning C4018: '<': signed/unsigned mismatch
-d:\misc\учеба\labsprogs\lab3\src\arithmetic.cpp(135): warning C4018: '<': signed/unsigned mismatch
-  arithmetic.vcxproj -> D:\Misc\Учеба\LabsProgs\Lab3\sln\Debug\arithmetic.lib
+c:\users\mezotaken\desktop\lab3-master\src\arithmetic.cpp(9): warning C4018: '<': signed/unsigned mismatch
+c:\users\mezotaken\desktop\lab3-master\src\arithmetic.cpp(42): warning C4018: '<': signed/unsigned mismatch
+c:\users\mezotaken\desktop\lab3-master\src\arithmetic.cpp(112): warning C4018: '<': signed/unsigned mismatch
+c:\users\mezotaken\desktop\lab3-master\src\arithmetic.cpp(134): warning C4018: '<': signed/unsigned mismatch
+  arithmetic.vcxproj -> C:\Users\mezotaken\Desktop\Lab3-master\sln\Debug\arithmetic.lib
